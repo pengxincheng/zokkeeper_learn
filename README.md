@@ -1,2 +1,2 @@
-# zokkeeper_learn
+# zookeeper-learn
 zokkeeper learn demo
