@@ -1,2 +1,2 @@
 # zookeeper-learn
-zokkeeper learn demo
+zookeeper learn demo
