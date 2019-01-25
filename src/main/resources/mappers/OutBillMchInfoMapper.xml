@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pxc.zk.learn.configCenter.dao.OutBillMchInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pxc.zk.learn.configCenter.entity.OutBillMchInfo" >
+    <id column="bill_model_id" property="billModelId" jdbcType="VARCHAR" />
+    <id column="sp_mid" property="spMid" jdbcType="VARCHAR" />
+    <result column="mch_id" property="mchId" jdbcType="VARCHAR" />
+    <result column="mch_name" property="mchName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="templete_id" property="templeteId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    bill_model_id, sp_mid, mch_id, mch_name, create_time, update_time, templete_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pxc.zk.learn.configCenter.entity.OutBillMchInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from out_bill_mch_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.pxc.zk.learn.configCenter.entity.OutBillMchInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from out_bill_mch_info
+    where bill_model_id = #{billModelId,jdbcType=VARCHAR}
+      and sp_mid = #{spMid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.pxc.zk.learn.configCenter.entity.OutBillMchInfoKey" >
+    delete from out_bill_mch_info
+    where bill_model_id = #{billModelId,jdbcType=VARCHAR}
+      and sp_mid = #{spMid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pxc.zk.learn.configCenter.entity.OutBillMchInfoExample" >
+    delete from out_bill_mch_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pxc.zk.learn.configCenter.entity.OutBillMchInfo" >
+    insert into out_bill_mch_info (bill_model_id, sp_mid, mch_id, 
+      mch_name, create_time, update_time, 
+      templete_id)
+    values (#{billModelId,jdbcType=VARCHAR}, #{spMid,jdbcType=VARCHAR}, #{mchId,jdbcType=VARCHAR}, 
+      #{mchName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{templeteId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pxc.zk.learn.configCenter.entity.OutBillMchInfo" >
+    insert into out_bill_mch_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="billModelId != null" >
+        bill_model_id,
+      </if>
+      <if test="spMid != null" >
+        sp_mid,
+      </if>
+      <if test="mchId != null" >
+        mch_id,
+      </if>
+      <if test="mchName != null" >
+        mch_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="templeteId != null" >
+        templete_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="billModelId != null" >
+        #{billModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="spMid != null" >
+        #{spMid,jdbcType=VARCHAR},
+      </if>
+      <if test="mchId != null" >
+        #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="mchName != null" >
+        #{mchName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templeteId != null" >
+        #{templeteId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pxc.zk.learn.configCenter.entity.OutBillMchInfoExample" resultType="java.lang.Integer" >
+    select count(*) from out_bill_mch_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update out_bill_mch_info
+    <set >
+      <if test="record.billModelId != null" >
+        bill_model_id = #{record.billModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spMid != null" >
+        sp_mid = #{record.spMid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchId != null" >
+        mch_id = #{record.mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchName != null" >
+        mch_name = #{record.mchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.templeteId != null" >
+        templete_id = #{record.templeteId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update out_bill_mch_info
+    set bill_model_id = #{record.billModelId,jdbcType=VARCHAR},
+      sp_mid = #{record.spMid,jdbcType=VARCHAR},
+      mch_id = #{record.mchId,jdbcType=VARCHAR},
+      mch_name = #{record.mchName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      templete_id = #{record.templeteId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pxc.zk.learn.configCenter.entity.OutBillMchInfo" >
+    update out_bill_mch_info
+    <set >
+      <if test="mchId != null" >
+        mch_id = #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="mchName != null" >
+        mch_name = #{mchName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templeteId != null" >
+        templete_id = #{templeteId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bill_model_id = #{billModelId,jdbcType=VARCHAR}
+      and sp_mid = #{spMid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pxc.zk.learn.configCenter.entity.OutBillMchInfo" >
+    update out_bill_mch_info
+    set mch_id = #{mchId,jdbcType=VARCHAR},
+      mch_name = #{mchName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      templete_id = #{templeteId,jdbcType=INTEGER}
+    where bill_model_id = #{billModelId,jdbcType=VARCHAR}
+      and sp_mid = #{spMid,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

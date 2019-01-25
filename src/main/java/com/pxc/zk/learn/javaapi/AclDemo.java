@@ -5,10 +5,13 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
+import org.apache.zookeeper.server.auth.DigestAuthenticationProvider;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -57,10 +60,17 @@ public class AclDemo {
         });
         countDownLatch.await();
 
-        zooKeeper.addAuthInfo("digest", "root:123456".getBytes());
+     /*   zooKeeper.addAuthInfo("digest", "root:123456".getBytes());
         String result = zooKeeper.create("/auth-test1/test1", "asd".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-        System.out.println(result);
+        System.out.println(result);*/
+
+     List<String> children = zooKeeper.getChildren("/auth-test",null);
         TimeUnit.SECONDS.sleep(10);
+    }
+
+    @Test
+    public void test() throws NoSuchAlgorithmException {
+        System.out.println(DigestAuthenticationProvider.generateDigest("superAdmin:123456"));
     }
 
 }
