@@ -80,18 +80,15 @@ public class ZookeeperConfigCenter {
 
     //对zookeeper上的数据库配置文件所在节点进行监听，如果有改变就动态刷新props
     private void addZkListener() {
-        TreeCacheListener listener = new TreeCacheListener() {
-            @Override
-            public void childEvent(CuratorFramework client, TreeCacheEvent event) throws Exception {
-                if (event.getType() == TreeCacheEvent.Type.NODE_UPDATED) {
-                    ZookeeperConfigCenter.this.getConfigData();
-                    WebApplicationContext ctx = ContextLoader.getCurrentWebApplicationContext();
-                    DruidDataSource dataSource = (DruidDataSource) ctx.getBean("dataSource");
+        TreeCacheListener listener = (client, event) -> {
+            if (event.getType() == TreeCacheEvent.Type.NODE_UPDATED) {
+                ZookeeperConfigCenter.this.getConfigData();
+                WebApplicationContext ctx = ContextLoader.getCurrentWebApplicationContext();
+                DruidDataSource dataSource = (DruidDataSource) ctx.getBean("dataSource");
 
-                    dataSource.setUrl(props.getProperty("url"));
-                    dataSource.setUsername(props.getProperty("username"));
-                    dataSource.setPassword(props.getProperty("password "));
-                }
+                dataSource.setUrl(props.getProperty("url"));
+                dataSource.setUsername(props.getProperty("username"));
+                dataSource.setPassword(props.getProperty("password "));
             }
         };
 
