@@ -82,5 +82,6 @@
     </bean>
 
 
+    <import resource="springmvc.xml"/>
 
 </beans>

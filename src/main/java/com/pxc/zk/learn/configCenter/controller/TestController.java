@@ -1,13 +1,11 @@
 package com.pxc.zk.learn.configCenter.controller;
 
-import com.pxc.zk.learn.configCenter.ZookeeperPlaceholderConfigurer;
 import com.pxc.zk.learn.configCenter.dao.OutBillMchInfoMapper;
 import com.pxc.zk.learn.configCenter.entity.OutBillMchInfo;
 import com.pxc.zk.learn.configCenter.entity.OutBillMchInfoExample;
-import com.pxc.zk.learn.configCenter.entity.OutBillMchInfoKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,7 +17,7 @@ import java.util.List;
  * @Date: 2019/1/25
  * @Time 15:04
  */
-@Configuration
+@Controller
 public class TestController {
 
     private Logger logger = LoggerFactory.getLogger(TestController.class);
